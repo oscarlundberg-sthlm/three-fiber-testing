@@ -8,6 +8,11 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.h-screen {
+  height: 100vh;
+  height: 100svh;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
