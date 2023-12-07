@@ -4,6 +4,8 @@ import { useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
+import { Euler, Quaternion } from "three";
+import { degToRad } from "three/src/math/MathUtils.js";
 
 interface WheelProps {
     positionX?: number;
@@ -25,33 +27,36 @@ const Wheel = ({
         if (!refWheel?.current) return;
 
         if (wheelType === "front") {
+            if (!get()[Controls.left] && !get()[Controls.right]) {
+                refWheel.current.setRotation(
+                    new Quaternion().setFromEuler(new Euler(0, 0, 0)),
+                    true
+                );
+            }
             if (get()[Controls.left]) {
-                refWheel.current.applyImpulse({ x: 0, y: 0, z: 3 }, true);
-                refWheel.current.addForce({ x: 0, y: 0, z: 10 }, true);
+                refWheel.current.setRotation(
+                    new Quaternion().setFromEuler(
+                        new Euler(0, degToRad(25), 0)
+                    ),
+                    true
+                );
             }
             if (get()[Controls.right]) {
-                refWheel.current.applyImpulse({ x: 0, y: 0, z: -3 }, true);
-                refWheel.current.addForce({ x: 0, y: 0, z: -10 }, true);
+                refWheel.current.setRotation(
+                    new Quaternion().setFromEuler(
+                        new Euler(0, degToRad(-25), 0)
+                    ),
+                    true
+                );
             }
-        }
-        if (wheelType === "back") {
-            if (get()[Controls.forward]) {
-                refWheel.current.applyImpulse({ x: 0, y: 0, z: 3 }, true);
-                refWheel.current.addForce({ x: 0, y: 0, z: 10 }, true);
-            }
-            if (get()[Controls.back]) {
-                refWheel.current.applyImpulse({ x: 0, y: 0, z: -3 }, true);
-                refWheel.current.addForce({ x: 0, y: 0, z: -10 }, true);
-            }
-        }
-
-        if (get()[Controls.jump]) {
         }
     });
 
     return (
         <RigidBody
             ref={refWheel}
+            colliders={false}
+            enabledRotations={[true, false, false]}
             position={[positionX, radius, positionZ]}
             {...rest}
         >
@@ -59,7 +64,9 @@ const Wheel = ({
                 <cylinderGeometry
                     args={[radius, radius, radius * 1.5, 32, 1, false]}
                 />
-                <meshStandardMaterial color="white" />
+                <meshStandardMaterial
+                    color={wheelType === "back" ? "gray" : "white"}
+                />
             </mesh>
         </RigidBody>
     );
