@@ -29,9 +29,7 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
-  "overrides": {
-    "@react-three/rapier": {
-      "@dimforge/rapier3d-compat": "0.17.0"
-    }
+  "resolutions": {
+    "@dimforge/rapier3d-compat": "0.0.0-c23a138-20231001"
   }
 }
