@@ -2,7 +2,7 @@ import { RigidBody } from "@react-three/rapier";
 
 const Plane = (props) => {
     return (
-        <RigidBody>
+        <RigidBody type="fixed" colliders="cuboid">
             <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} {...props}>
                 <planeGeometry args={[2000, 2000]} />
                 <meshStandardMaterial color="#666666" />

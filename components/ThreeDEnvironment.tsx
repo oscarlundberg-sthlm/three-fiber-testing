@@ -2,7 +2,7 @@
 import Plane from "@/components/Plane";
 import Vehicle from "@/components/Vehicle";
 import { rotate } from "@/helpers/threeJs";
-import { OrbitControls } from "@react-three/drei";
+import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 
@@ -32,6 +32,13 @@ const ThreeDEnvironment = () => {
                 {/* <Wheel wheelType="back" positionX={-20} positionZ={-20} /> */}
                 <Vehicle position={[0, 10, 0]} rotation={[0, 0, 0]} />
             </Physics>
+
+            <ContactShadows
+                scale={20}
+                blur={0.4}
+                opacity={0.2}
+                position={[-0, -1.5, 0]}
+            />
 
             <OrbitControls />
         </Canvas>

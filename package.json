@@ -28,8 +28,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "resolutions": {
-    "@dimforge/rapier3d-compat": "0.0.0-c23a138-20231001"
   }
 }
