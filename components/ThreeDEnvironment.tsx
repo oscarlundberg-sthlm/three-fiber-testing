@@ -1,8 +1,8 @@
 'use client'
 import Plane from "@/components/Plane";
-import Vehicle from "@/components/Vehicle";
+import VehicleSimple from "@/components/VehicleSimple";
 import { rotate } from "@/helpers/threeJs";
-import { ContactShadows, OrbitControls } from "@react-three/drei";
+import { ContactShadows, Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 
@@ -23,14 +23,15 @@ const ThreeDEnvironment = () => {
                 angle={rotate(45)}
                 position={[1000, 1000, 1000]}
                 intensity={10000000}
-                color={"red"}
+                // color={"red"}
                 castShadow
             />
 
             <Physics gravity={[0, -50, 0]} debug>
                 <Plane position={[0, 0, 0]} />
                 {/* <Wheel wheelType="back" positionX={-20} positionZ={-20} /> */}
-                <Vehicle position={[0, 10, 0]} rotation={[0, 0, 0]} />
+                {/* <Vehicle position={[0, 10, 0]} rotation={[0, 0, 0]} /> */}
+                <VehicleSimple position={[0, 2, 0]} rotation={[0, 0, 0]} />
             </Physics>
 
             <ContactShadows
@@ -39,7 +40,7 @@ const ThreeDEnvironment = () => {
                 opacity={0.2}
                 position={[-0, -1.5, 0]}
             />
-
+            <Environment preset="park" background blur={0.2} />
             <OrbitControls />
         </Canvas>
     );
