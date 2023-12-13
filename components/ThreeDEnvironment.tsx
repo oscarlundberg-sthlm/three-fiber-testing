@@ -1,10 +1,12 @@
 'use client'
-import Plane from "@/components/Plane";
-import VehicleSimple from "@/components/VehicleSimple";
 import { rotate } from "@/helpers/threeJs";
 import { ContactShadows, Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Physics } from "@react-three/rapier";
+
+import { Debug, Physics } from "@react-three/cannon";
+import { Suspense } from "react";
+import Plane from "./Plane";
+import Vehicle from "./pickupTruck/Vehicle";
 
 const ThreeDEnvironment = () => {
     return (
@@ -26,13 +28,19 @@ const ThreeDEnvironment = () => {
                 // color={"red"}
                 castShadow
             />
-
-            <Physics gravity={[0, -50, 0]} debug>
-                <Plane position={[0, 0, 0]} />
-                {/* <Wheel wheelType="back" positionX={-20} positionZ={-20} /> */}
-                {/* <Vehicle position={[0, 10, 0]} rotation={[0, 0, 0]} /> */}
-                <VehicleSimple position={[0, 2, 0]} rotation={[0, 0, 0]} />
-            </Physics>
+            <pointLight position={[0,20,0]} castShadow intensity={1000} />
+            
+            <Suspense>
+                <Physics broadphase="SAP" contactEquationRelaxation={4} friction={1e-3} allowSleep>
+                    <Debug>
+                        <Plane position={[0, 0, 0]} />
+                        {/* <Wheel wheelType="back" positionX={-20} positionZ={-20} /> */}
+                        {/* <Vehicle position={[0, 10, 0]} rotation={[0, 0, 0]} /> */}
+                        {/* <VehicleSimpleBlender position={[0, 10, 0]} rotation={[0, 0, 0]} /> */}
+                        <Vehicle position={[0, 2, 0]} angularVelocity={[0, 1, 0]} wheelRadius={2} />
+                    </Debug>
+                </Physics>
+            </Suspense>
 
             <ContactShadows
                 scale={20}

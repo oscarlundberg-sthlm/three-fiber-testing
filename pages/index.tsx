@@ -11,7 +11,8 @@ export default function Home() {
             { name: Controls.back, keys: ["ArrowDown", "KeyS"] },
             { name: Controls.left, keys: ["ArrowLeft", "KeyA"] },
             { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
-            { name: Controls.jump, keys: ["Space"] },
+            { name: Controls.brake, keys: ["Space"] },
+            { name: Controls.respawn, keys: ["KeyR"] },
         ],
         []
     );
