@@ -11,37 +11,39 @@ export function Landscape(props) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube002.geometry}
-      />
+      /> */}
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube002_1.geometry}
         material={materials["Material.006"]}
+        position={[20,10,20]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube002_2.geometry}
         material={materials["Material.005"]}
+        position={[-10,0,-20]}
       />
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube002_3.geometry}
         material={materials.photo}
       >
         <meshBasicMaterial map={image} />
-      </mesh>
-      <mesh
+      </mesh> */}
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube002_4.geometry}
         material={materials["Material.003"]}
-      />
+      /> */}
     </group>
   );
 }

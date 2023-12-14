@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/cannon";
 import { Suspense } from "react";
 import { Landscape } from "./Landscape";
+import { OscarStatuett } from "./OscarStatuett";
 import Plane from "./Plane";
 import Vehicle from "./pickupTruck/Vehicle";
 
@@ -29,6 +30,7 @@ const ThreeDEnvironment = () => {
                     {/* <Debug> */}
                         <Plane position={[0, 0, 0]} />
                         <Landscape position={[0,0,0]}/>
+                        <OscarStatuett position={[0,0,100]} rotation={[0,rotate(90),0]} />
                         <Vehicle position={[0, 2, 0]} wheelRadius={2} />
                     {/* </Debug> */}
                 </Physics>
