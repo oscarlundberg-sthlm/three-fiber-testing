@@ -5,11 +5,11 @@ import { Canvas } from "@react-three/fiber";
 
 import { Physics } from "@react-three/cannon";
 import { Suspense } from "react";
+import { Landscape } from "./Landscape";
 import Plane from "./Plane";
 import Vehicle from "./pickupTruck/Vehicle";
 
 const ThreeDEnvironment = () => {
-
 
     return (
         <Canvas
@@ -28,7 +28,8 @@ const ThreeDEnvironment = () => {
                 <Physics broadphase="SAP" allowSleep>
                     {/* <Debug> */}
                         <Plane position={[0, 0, 0]} />
-                        <Vehicle position={[0, 2, 0]} angularVelocity={[0, 1, 0]} wheelRadius={2} />
+                        <Landscape position={[0,0,0]}/>
+                        <Vehicle position={[0, 2, 0]} wheelRadius={2} />
                     {/* </Debug> */}
                 </Physics>
             </Suspense>

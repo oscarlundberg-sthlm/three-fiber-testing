@@ -64,8 +64,9 @@ const TruckBody = forwardRef(
                                 makeDefault
                                 near={0.1}
                                 far={50000}
-                                position={[0, 20, 20]}
-                                rotation={[rotate(-30), 0, 0]}
+                                fov={100}
+                                position={[0, 3, 6]}
+                                rotation={[rotate(-6), 0, 0]}
                             />
                         </mesh>
                         <mesh

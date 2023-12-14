@@ -6,6 +6,7 @@ const Plane = (props) => {
     const [ref] = usePlane(() => ({ type: 'Static', material: 'ground', friction: 1e-3, rotation: [-Math.PI / 2, 0, 0], ...props }))
     const texture = useTexture("/maps/sketchpattern.png");
     texture.repeat = new Vector2(100, 100);
+    texture.flipY = false;
     texture.wrapS = RepeatWrapping;
     texture.wrapT = RepeatWrapping;
 
