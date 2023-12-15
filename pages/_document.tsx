@@ -5,6 +5,7 @@ export default function Document() {
         <Html>
             <Head>
                 <title>Oscar Lundberg • Creative coder</title>
+                <meta name="theme-color" content="#050505" />
             </Head>
             <body>
                 <Main />
