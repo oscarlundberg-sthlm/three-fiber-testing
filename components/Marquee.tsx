@@ -13,7 +13,6 @@ const Marquee = ({ children, className }: Props) => {
                 autoFill
                 loop={0}
                 speed={20}
-                pauseOnHover
             >
                 { children }
             </MarqueePlugin>
