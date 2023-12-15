@@ -17,7 +17,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter-tight)'],
+        sans: ['var(--font-inter)'],
+        ['sans-tight']: ['var(--font-inter-tight)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -60,9 +60,8 @@ export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, fr
     }, [api]);
   
     const resetCar = () => {
-      chassis.current.api.position.set(0, 2, 0);
+      chassis.current.api.position.set(0, 2, -40);
       chassis.current.api.velocity.set(0, 0, 0);
-      chassis.current.api.angularVelocity.set(0, 0.5, 0);
       chassis.current.api.rotation.set(0, 0, 0);
     };
 

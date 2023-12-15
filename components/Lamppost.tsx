@@ -6,12 +6,13 @@ import { useGLTF } from "@react-three/drei";
 
 export function Lamppost(props) {
   const { nodes, materials } = useGLTF("/threeDModels/lamppost.glb");
+  
   return (
     <group {...props} dispose={null}>
       <group position={[0, 3.375, 0]}>
         <pointLight 
-            intensity={100}
-            decay={1.5}
+            intensity={1000}
+            decay={1.8}
             position={[0,2.7,0]}
             color="#f8fff1"
         />
