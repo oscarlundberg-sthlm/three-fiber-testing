@@ -24,7 +24,7 @@ export function OscarStatuett(props) {
         material={materials.photo}
       >
         <meshBasicMaterial map={image} />
-    </mesh>
+      </mesh>
       <mesh
         castShadow
         receiveShadow

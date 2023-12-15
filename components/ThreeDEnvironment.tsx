@@ -5,8 +5,9 @@ import { Canvas } from "@react-three/fiber";
 
 import { Physics } from "@react-three/cannon";
 import { Suspense } from "react";
-import { Landscape } from "./Landscape";
+import { Lamppost } from "./Lamppost";
 import { OscarStatuett } from "./OscarStatuett";
+import { OscarText } from "./OscarText";
 import Plane from "./Plane";
 import Vehicle from "./pickupTruck/Vehicle";
 
@@ -29,9 +30,21 @@ const ThreeDEnvironment = () => {
                 <Physics broadphase="SAP" allowSleep>
                     {/* <Debug> */}
                         <Plane position={[0, 0, 0]} />
-                        <Landscape position={[0,0,0]}/>
-                        <OscarStatuett position={[0,0,100]} rotation={[0,rotate(90),0]} />
-                        <Vehicle position={[0, 2, 0]} wheelRadius={2} />
+                        <OscarText position={[0,15,30]} />
+                        <OscarStatuett position={[0,0,160]} rotation={[0,rotate(90),0]} />
+                        {[...Array(5)].map((_,i) => {
+                            const initialDepthPosition = 10; 
+                            const extraDistance = 15;
+                            const depthPosition = initialDepthPosition + (i * extraDistance);
+                            return <Lamppost key={'lamppostsLeftLane_' + depthPosition} position={[40,0,depthPosition]} />
+                        })}
+                        {[...Array(5)].map((_,i) => {
+                            const initialDepthPosition = 10; 
+                            const extraDistance = 15;
+                            const depthPosition = initialDepthPosition + (i * extraDistance);
+                            return <Lamppost key={'lamppostsLeftLane_' + depthPosition} position={[-40,0,depthPosition]} />
+                        })}
+                        <Vehicle position={[0, 2, -40]} wheelRadius={2} />
                     {/* </Debug> */}
                 </Physics>
             </Suspense>
@@ -44,6 +57,8 @@ const ThreeDEnvironment = () => {
             />
             <Environment preset="night" background blur={0.2} />
             {/* <OrbitControls /> */}
+
+            
         </Canvas>
     );
 };

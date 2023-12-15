@@ -13,7 +13,7 @@ const LEFT_SPAWN_POINT = -12;
 const FORWARD_BOUNDARY = 10;
 const BACK_BOUNDARY = -20;
 
-export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, front = 1.45, back = -1.35, steer = 0.6, force = 5000, maxBrake = 40, position, ...props }) {
+export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, front = 1.45, back = -1.35, steer = 0.6, force = 1000, maxBrake = 40, position, ...props }) {
     const chassis = useRef();
     const wheel1 = useRef();
     const wheel2 = useRef();
@@ -73,17 +73,16 @@ export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, fr
         const { forward, back, left, right, brake, respawn } = get();
 
         const forceMultiplier = forward && !back ? -1 : 1;
-        forward || back ? api.applyEngineForce(force * forceMultiplier, 0) : api.applyEngineForce(0, 0);
+        const steerMultiplier = left && !right ? 1 : -1;
 
         // S is referring to the front wheels
         for (let s = 0; s < 2; s++) {
-            const steerMultiplier = left && !right ? 1 : -1;
-
             left || right ? api.setSteeringValue(steer * steerMultiplier, s) : api.setSteeringValue(0, s);
         }
-
+          
         // B is referring to the back wheels
-        for (let b = 0; b < 4; b++) {
+        for (let b = 2; b < 4; b++) {
+            forward || back ? api.applyEngineForce(force * forceMultiplier, b) : api.applyEngineForce(0, b);
             const brakeMultipler = brake ? maxBrake : 0;
             api.setBrake(brakeMultipler, b);
         }
