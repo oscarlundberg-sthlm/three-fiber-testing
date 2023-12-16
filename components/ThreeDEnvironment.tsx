@@ -29,7 +29,7 @@ const ThreeDEnvironment = () => {
                 {/* <Debug> */}
                     <Plane position={[0, 0, 0]} />
                     <OscarText position={[0,15,30]} />
-                    <OscarStatuett position={[0,0,160]} rotation={[0,rotate(90),0]} />
+                    <OscarStatuett position={[0,5,160]} rotation={[0,rotate(90),0]} />
                     {[...Array(5)].map((_,i) => {
                         const initialDepthPosition = -10; 
                         const extraDistance = 25;
