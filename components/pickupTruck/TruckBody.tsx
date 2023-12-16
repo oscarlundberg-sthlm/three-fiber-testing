@@ -18,10 +18,10 @@ interface TruckBodyProps {
 
 const TruckBody = forwardRef(
   (
-    { args = [1.7, 0.4, 4], mass = 500, setVisible, ...props }: TruckBodyProps,
+    { args = [1.7, 0.4, 4], mass = 500, setVisible, ...props }: any,
     ref
   ) => {
-    const { nodes, materials } = useGLTF("threeDModels/pickup/carbody.glb");
+    const { nodes, materials }: { nodes: any, materials: any } = useGLTF("threeDModels/pickup/carbody.glb");
 
     const [, api] = useBox(
       () => ({
@@ -30,7 +30,7 @@ const TruckBody = forwardRef(
         allowSleep: false,
         ...props,
       }),
-      ref
+      ref as any
     );
 
     const spotlightFront = useMemo(() => new SpotLight('#f8fff1'), []);
@@ -38,7 +38,8 @@ const TruckBody = forwardRef(
 
     return (
       <mesh
-        ref={ref}
+        ref={ref as any}
+        /* @ts-ignore */
         api={api}
         userData={{ id: "truckbody" }}
         {...props}
@@ -113,4 +114,5 @@ const TruckBody = forwardRef(
   }
 );
 
+TruckBody.displayName = 'TruckBody';
 export default TruckBody;

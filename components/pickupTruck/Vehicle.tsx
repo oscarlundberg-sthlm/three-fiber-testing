@@ -13,7 +13,7 @@ const LEFT_SPAWN_POINT = -12;
 const FORWARD_BOUNDARY = 10;
 const BACK_BOUNDARY = -20;
 
-export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, front = 1.45, back = -1.35, steer = 0.6, force = 1000, maxBrake = 40, position, ...props }) {
+export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, front = 1.45, back = -1.35, steer = 0.6, force = 1000, maxBrake = 40, position = [0,0,0], ...props }) {
     const chassis = useRef();
     const wheel1 = useRef();
     const wheel2 = useRef();
@@ -43,25 +43,30 @@ export default function Vehicle({ radius = 0.55, width = 1.33, height = -0.5, fr
     const wheelInfo3 = { ...wheelInfo, isFrontWheel: false, chassisConnectionPointLocal: [-width / 1.5, height, back] };
     const wheelInfo4 = { ...wheelInfo, isFrontWheel: false, chassisConnectionPointLocal: [width / 1.5, height, back] };
   
-    const [vehicle, api] = useRaycastVehicle(() => ({
+    const [vehicle, api]: [any, any] = useRaycastVehicle(() => ({
       chassisBody: chassis,
       wheels: [wheel1, wheel2, wheel3, wheel4],
       wheelInfos: [wheelInfo1, wheelInfo2, wheelInfo3, wheelInfo4],
       indexForwardAxis: 2,
       indexRightAxis: 0,
       indexUpAxis: 1
-    }));
+    } as any));
   
     // raycastVehicles, etc. (anything created in cannon) doesnt necessarily track position.
     const vehiclePos = useRef([0, 0, 0]);
   
     useEffect(() => {
+      // @ts-ignore
       chassis?.current?.api.position.subscribe((v) => (vehiclePos.current = v));
     }, [api]);
   
     const resetCar = () => {
+      if (!chassis?.current) return;
+      // @ts-ignore
       chassis.current.api.position.set(0, 2, -40);
+      // @ts-ignore
       chassis.current.api.velocity.set(0, 0, 0);
+      // @ts-ignore
       chassis.current.api.rotation.set(0, 0, 0);
     };
 

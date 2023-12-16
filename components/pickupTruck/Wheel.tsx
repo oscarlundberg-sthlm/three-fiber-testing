@@ -14,13 +14,13 @@ interface WheelProps {
 useGLTF.preload("threeDModels/pickup/carwheel.glb");
 
 const Wheel = forwardRef(({ radius = 1, leftSide, ...props }: WheelProps, ref) => {
-    const { nodes, materials } = useGLTF("threeDModels/pickup/carwheel.glb");
+    const { nodes, materials }: { nodes: any, materials: any } = useGLTF("threeDModels/pickup/carwheel.glb");
 
     // kinematic bodies move based on their velocity and need to be manually moved.
-    useCylinder(() => ({ mass: 10, type: 'Kinematic', material: 'wheel', collisionFilterGroup: 0, args: [radius, radius, 0.5, 16], ...props }), ref);
+    useCylinder(() => ({ mass: 10, type: 'Kinematic', material: 'wheel', collisionFilterGroup: 0, args: [radius, radius, 0.5, 16], ...props }), ref as any);
 
     return (
-        <mesh ref={ref}>
+        <mesh ref={ref as any}>
             <mesh rotation={[0, 0, ((leftSide ? 1 : -1) * Math.PI) / 2]}>
                 <mesh
                     castShadow
@@ -33,4 +33,5 @@ const Wheel = forwardRef(({ radius = 1, leftSide, ...props }: WheelProps, ref) =
     );
 });
 
+Wheel.displayName = 'Wheel';
 export default Wheel;
