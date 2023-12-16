@@ -61,6 +61,9 @@ export default function Home() {
                     <div className="font-sans-tight font-bold text-2xl lg:text-4xl mb-6 leading-none lg:leading-none text-primary uppercase">Hello, <span>I&apos;m Oscar</span>.<br/>Frontend developer &<br/>all around creative person</div>
                     <div className="text-primary-100 leading-tight text-sm lg:text-base">Reach me at <a href="mailto:oscarlundberg@hotmail.com" className="transition-colors hover:text-primary py-3 -my-3">oscarlundberg@hotmail.com</a></div>
                 </div>
+                {/* <div className="absolute right-4 bottom-4">
+                    <ControlsInfo />
+                </div> */}
             </main>
         </KeyboardControls>
     );
