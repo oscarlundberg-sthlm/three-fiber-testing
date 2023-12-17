@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import Arrow from "./Arrow";
 
 interface ItemData {
@@ -18,33 +18,35 @@ function Item({ _key, text, setControlsUsed }: ItemData) {
         }
     }
 
-    if (!_key || !text) return <></>;
-
-    const config: Config = {
+    const config = useMemo<Config>(() => ({
         forward:    { keyCode: 'ArrowUp',       component: () => ( <Arrow /> ) },
         right:      { keyCode: 'ArrowRight',    component: () => ( <Arrow className="rotate-90" /> ) },
         back:       { keyCode: 'ArrowDown',     component: () => ( <Arrow className="rotate-180" /> ) },
         left:       { keyCode: 'ArrowLeft',     component: () => ( <Arrow className="-rotate-90" /> ) },
-    };
-
-    function keydownHandler(event: KeyboardEvent) {
-        if (event.code !== config[_key].keyCode) return;
-        setKeydown(true);
-        setControlsUsed(true);
-    }
-    function keyupHandler(event: KeyboardEvent) {
-        if (event.code !== config[_key].keyCode) return;
-        setKeydown(false);
-    }
+    }),[]);
 
     useEffect(() => {
+        if (!_key) return;
+
+        function keydownHandler(event: KeyboardEvent) {
+            if (event.code !== config[_key].keyCode) return;
+            setKeydown(true);
+            setControlsUsed(true);
+        }
+        function keyupHandler(event: KeyboardEvent) {
+            if (event.code !== config[_key].keyCode) return;
+            setKeydown(false);
+        }
+
         window.addEventListener('keydown', keydownHandler)
         window.addEventListener('keyup', keyupHandler)
         return () => {
             window.removeEventListener('keydown', keydownHandler);
             window.removeEventListener('keyup', keyupHandler);
         }
-    },[keydownHandler, keyupHandler]);
+    },[_key, config, setControlsUsed, setKeydown]);
+
+    if (!_key || !text) return <></>;
 
     return (
         <div 
