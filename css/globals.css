@@ -13,6 +13,10 @@
   height: 100svh;
 }
 
+.no-callout {
+  -webkit-touch-callout: none; /* iOS Safari */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
